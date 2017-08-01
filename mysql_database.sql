@@ -45,7 +45,7 @@ CREATE TABLE `ref_env` (
 
 /*Data for the table `ref_env` */
 
-insert  into `ref_env`(`env_id`,`env_name`,`is_enabled`) values (1,'prod-bj-yz',''),(2,'test-sh-h5',''),(255,'un-assigned','');
+insert  into `ref_env`(`env_id`,`env_name`,`is_enabled`) values (1,'prod-bj',''),(2,'test',''),(255,'un-assigned','');
 
 /* Procedure structure for procedure `USP_CheckinIP` */
 
