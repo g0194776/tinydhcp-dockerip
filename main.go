@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"sync"
 
 	"github.com/g0194776/tinydhcp-dockerip/providers"
 	log "github.com/sirupsen/logrus"
@@ -13,6 +14,7 @@ import (
 
 var (
 	provider providers.DataProvider
+	lock     *sync.Mutex
 )
 
 func main() {
@@ -45,6 +47,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error occured while initializing data provider, error: %s", err.Error())
 	}
+	lock = &sync.Mutex{}
 	log.Info("Initializing Web Engine...")
 	app := iris.New()
 	app.Adapt(httprouter.New())
@@ -58,6 +61,8 @@ func main() {
 }
 
 func WorkProc(ctx *iris.Context) {
+	lock.Lock()
+	defer lock.Unlock()
 	nodeIp := ctx.URLParam("node-ip")
 	owner := ctx.URLParam("owner")
 	desc := ctx.URLParam("desc")
