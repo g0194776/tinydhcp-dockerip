@@ -28,7 +28,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error occured while creating a data provider by you passed argument: provider (%s), error: %s", *providerStr, err.Error())
 	}
-	if *envId == 255 {
+	if *envId == 255 && *needInitData {
 		log.Fatal("You have to typed another one real BIZ environment ID rather than 255.")
 	}
 	log.Info("Start initializing data provider...")
